@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.getenv('SECRET_KEY')
 
-ALLOWED_HOSTS = ['dojo-on.onrender.com']  # ou ['meusite.onrender.com'] depois que tiver o link
+ALLOWED_HOSTS = ['*']  # ou ['meusite.onrender.com'] depois que tiver o link
 
 CSRF_TRUSTED_ORIGINS = [
     'https://dojo-on.onrender.com',  # troque pelo seu domínio
@@ -96,12 +96,12 @@ WSGI_APPLICATION = 'meu_projeto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
 DATABASES = {
-   'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', 
+    }
 }
 
 
